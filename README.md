@@ -15,13 +15,13 @@ Simply copy to $HOME/.screenrc and then add the following to your crontab:
 Requirements
 ------------
 GNU Bash
-GcalCLI (https://github.com/insanum/gcalcli.git)
-Cron
-GNU Screen
+<br>GcalCLI (https://github.com/insanum/gcalcli.git)
+<br>Cron
+<br>GNU Screen
 
 Example Output
 --------------
-<img src="/screenrc.png" border=0>
+<img src="/hunleyd/screenbits/screenrc.png" border=0>
 
 Bugs
 ----
