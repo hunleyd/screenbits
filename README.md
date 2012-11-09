@@ -21,7 +21,7 @@ GNU Bash
 
 Example Output
 --------------
-<img src="/hunleyd/screenbits/blob/master/screenrc.png" border=0>
+<img src="https://raw.github.com/hunleyd/screenbits/master/screenrc.png" border=0>
 
 Bugs
 ----
