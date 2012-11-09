@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Copyright Douglas J Hunley 2012
+
+python2 /home/doug/bin/gcalcli --nc agenda "`date`" "`date +%D` 11:55PM" | egrep -v '^$' > /tmp/cal.out
+
+if [ -s /tmp/cal.out ] ; then
+  cat /tmp/cal.out | while read line
+  do
+    first_char=`echo "$line" | cut -c1`
+    case "$first_char" in
+      S|M|T|W|F)
+        date=`echo "$line"|awk '{print $1 " " $2 " " $3}'`
+        time=`echo "$line"|awk '{print $4}'`
+        ;;
+      *)
+        time=`echo "$line"|awk '{print $1}'`
+        ;;
+    esac
+    event=`echo "$line"|cut -d: -f2-|cut -c7-`
+
+    echo "$date $time $event" >> /tmp/cal.new
+  done
+  rm /tmp/cal.out
+
+  old_line=
+  cat /tmp/cal.new | while read line
+  do
+    if [ ! "$old_line" = "$line" ] ; then
+      old_line=$line
+      echo "$line" >> /tmp/cal.final
+    fi
+  done
+  rm /tmp/cal.new
+
+  mv /tmp/cal.final $HOME/.appdata/gcalcli/agenda.txt
+else
+  mv /tmp/cal.out $HOME/.appdata/gcalcli/agenda.txt
+fi
+

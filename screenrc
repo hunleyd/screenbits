@@ -1,0 +1,30 @@
+# Copyright Douglas J Hunley 2012
+backtick 1 60 60 /home/doug/bin/screen_agenda
+hardstatus alwayslastline "[ %1` ]"
+activity "active: %n (%t) [%w:%s]"
+bell "bell: %n (%t) [%w:%s]^G"
+deflogin on
+defscrollback 10000
+defutf8 on
+msgwait 15
+multiuser on
+nonblock on
+setenv DISPLAY ':0'
+shell bash
+vbell on
+vbell_msg "[[[ ding ]]]"
+
+# only shift+j to kill
+bind k
+bind ^k
+bind K kill
+
+caption always "%{=}%?%{r}%H %L=%{+b}%?%{b}%-Lw%47L>%?%{w}%n*%f %t %?%{b}%+Lw%?%{g}%-31=%c %l %Y-%m-%d"
+
+sorendition "-b dw"
+
+# make the xterm scroller work in screen, also works
+# with mouse scrollwheel
+termcapinfo xterm|rxvt ti@:te@
+termcapinfo xterm|rxvt 'hs=\E]2;:fs=\007:ds=\E]2;screen\007'
+
