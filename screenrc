@@ -1,4 +1,4 @@
-# Copyright Douglas J Hunley 2013
+autodetach on
 backtick 1 60 60 /home/doug/bin/screen_agenda
 hardstatus alwayslastline "[ %1` ]"
 activity "active: %n (%t) [%w:%s]"
@@ -27,4 +27,7 @@ sorendition "-b dw"
 # with mouse scrollwheel
 termcapinfo xterm|rxvt ti@:te@
 termcapinfo xterm|rxvt 'hs=\E]2;:fs=\007:ds=\E]2;screen\007'
+
+# makes emerge update title under screen
+#termcapinfo rxvt 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'
 
