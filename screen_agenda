@@ -1,5 +1,7 @@
 #!/bin/bash
 
-# Copyright Douglas J Hunley 2013
-
-/usr/bin/head -n 1 ~/.appdata/gcalcli/agenda.txt | grep ':' || echo "Nothing scheduled"
+if [ -s ~/.calendar ] ; then
+    /usr/bin/head -n 1 ~/.calendar
+else
+    echo "Nothing scheduled"
+fi
