@@ -1,40 +1,19 @@
 #!/bin/bash
 
-# Copyright Douglas J Hunley 2013
+> ~/.calendar
+google calendar list --date `date +%F` --cal ".oug.*" --fields title,when | egrep -v '^\[|^$' | while read line
+do
+    current_time=$(date +%H%M)
+    event=$(echo "$line"|cut -d, -f1)
+    time=$(echo "$line"|cut -d, -f2)
+    start_time=$(echo "$time"|awk '{print $3}')
+    start_time_compact=$(echo "$start_time"|tr -d :)
+    end_time=$(echo "$time"|awk '{print $7}')
 
-python2 /home/doug/bin/gcalcli --nc agenda "`date`" "`date +%D` 11:55PM" | egrep -v '^$' > /tmp/cal.out
-
-if [ -s /tmp/cal.out ] ; then
-  cat /tmp/cal.out | while read line
-  do
-    first_char=`echo "$line" | cut -c1`
-    case "$first_char" in
-      S|M|T|W|F)
-        date=`echo "$line"|awk '{print $1 " " $2 " " $3}'`
-        time=`echo "$line"|awk '{print $4}'`
-        ;;
-      *)
-        time=`echo "$line"|awk '{print $1}'`
-        ;;
-    esac
-    event=`echo "$line"|cut -d: -f2-|cut -c7-`
-
-    echo "$date $time $event" >> /tmp/cal.new
-  done
-  rm /tmp/cal.out
-
-  old_line=
-  cat /tmp/cal.new | while read line
-  do
-    if [ ! "$old_line" = "$line" ] ; then
-      old_line=$line
-      echo "$line" >> /tmp/cal.final
+    if [ $start_time_compact -lt $current_time ] ; then
+        continue
+    else
+        echo "$event -- $start_time - $end_time" >> ~/.calendar
     fi
-  done
-  rm /tmp/cal.new
-
-  mv /tmp/cal.final $HOME/.appdata/gcalcli/agenda.txt
-else
-  mv /tmp/cal.out $HOME/.appdata/gcalcli/agenda.txt
-fi
+done
 
