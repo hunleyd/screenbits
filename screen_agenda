@@ -1,5 +1,5 @@
 #!/bin/bash
 
-# Copyright Douglas J Hunley 2012
+# Copyright Douglas J Hunley 2013
 
 /usr/bin/head -n 1 ~/.appdata/gcalcli/agenda.txt | grep ':' || echo "Nothing scheduled"

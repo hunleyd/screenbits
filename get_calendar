@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright Douglas J Hunley 2012
+# Copyright Douglas J Hunley 2013
 
 python2 /home/doug/bin/gcalcli --nc agenda "`date`" "`date +%D` 11:55PM" | egrep -v '^$' > /tmp/cal.out
 

@@ -1,4 +1,4 @@
-# Copyright Douglas J Hunley 2012
+# Copyright Douglas J Hunley 2013
 backtick 1 60 60 /home/doug/bin/screen_agenda
 hardstatus alwayslastline "[ %1` ]"
 activity "active: %n (%t) [%w:%s]"
